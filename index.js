@@ -5,7 +5,7 @@ const fs = require('fs')
 const cors = require('cors')
 const app = express()
 const env = require('./environment')
-
+const path = require('path')
 
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
@@ -24,13 +24,17 @@ app.use(cors())
 
 // localhost
 const client = new Client({
-    user:env.localhostClient.user,
-    host:env.localhostClient.host,
-    database:env.localhostClient.database,
-    password:env.localhostClient.password,
-    port:env.localhostClient.port,
+  user: env.localhostClient.user,
+  host: env.localhostClient.host,
+  database: env.localhostClient.database,
+  password: env.localhostClient.password,
+  port: env.localhostClient.port,
 });
 
+let authQuery = `SET postgis.gdal_vsi_options = 'AWS_ACCESS_KEY_ID=${env.s3Config_7a.accessKeyID} AWS_SECRET_ACCESS_KEY=${env.s3Config_7a.secretAccessKey} AWS_DEFAULT_REGION=${env.s3Config_7a.region}';
+SET postgis.gdal_enabled_drivers = 'ENABLE_ALL';
+SET postgis.enable_outdb_rasters = 1;
+`
 
 client.connect((err) => {
   if (err) {
@@ -39,25 +43,6 @@ client.connect((err) => {
     console.log(`DB Connected (${client.database})`,)
   }
 })
-
-app.get('/', (req, res) => {
-
-  //mosiaqdev
-  let result = client.query(`
-    SELECT * FROM hydrocarbons.published_play ;
-    `).then(result => {
-    res.send(result)
-  })
-
-  //localhost
-  // let result =  client.query(`
-  // SELECT * FROM wellbores."PublishedPlay" ;
-  // `).then(result=>{
-  //   res.send(result)
-  // })
-
-})
-
 
 
 app.get('/getFilters/:tableName', (req, res) => {
@@ -143,19 +128,25 @@ app.get('/updateStructuralElements', (req, res) => {
 app.post('/getRasterImage', (req, res) => {
 
   let geojson = JSON.stringify(req.body.geojson)
+  let colormap = req.body.colormap
+  let colormapQuery = ""
+  if (colormap == 'default') {
+    colormapQuery = "r.a"
+  } else {
+    colormapQuery = `st_colormap(r.a,'${colormap}')`
 
-  client.query(`
-  SET postgis.gdal_vsi_options = 'AWS_ACCESS_KEY_ID=${env.s3Config_7a.accessKeyID} AWS_SECRET_ACCESS_KEY=${env.s3Config_7a.secretAccessKey} AWS_DEFAULT_REGION=${env.s3Config_7a.region}';  `).then(() => {
+  }
+  client.query(authQuery).then(() => {
     client.query(`
-    
-    SELECT 'data:image/png;base64,' || encode(st_aspng(ST_Union( ST_Clip(r.rast, g) )),'base64')
-    FROM nyc_dem_cog AS r
+
+        with r as ( SELECT ST_Union(ST_Clip(r.rast, g)) as a
+        FROM o_4_nyc_dem_cog AS r
         INNER JOIN
               st_transform(st_geomfromgeojson('${geojson}'),2263) as g
-            ON ST_Intersects(r.rast, g) `).then(result => {
+            ON ST_Intersects(r.rast, g) )
+        select 'data:image/png;base64,' || encode(st_aspng(${colormapQuery}),'base64'),st_asgeojson(st_transform(st_envelope(r.a),4326)) from r
+            `).then(result => {
       res.send(result.rows);
-
-
     })
   })
 })
@@ -164,17 +155,14 @@ app.post('/getContourLines', (req, res) => {
 
   let geojson = JSON.stringify(req.body.geojson)
 
-  client.query(`
-  SET postgis.gdal_vsi_options = 'AWS_ACCESS_KEY_ID=${env.s3Config_7a.accessKeyID} AWS_SECRET_ACCESS_KEY=${env.s3Config_7a.secretAccessKey} AWS_DEFAULT_REGION=${env.s3Config_7a.region}';  `).then(() => {
+  client.query(authQuery).then(() => {
     client.query(`
 
 with contours as (
-
-
   SELECT (ST_Contour(
     (
       SELECT ST_Union( ST_Clip(r.rast, g) )
-  FROM nyc_dem_cog AS r
+  FROM o_3_nyc_dem_cog AS r
       INNER JOIN
             st_transform(st_geomfromgeojson('${geojson}'),2263) as g
           ON ST_Intersects(r.rast, g)
@@ -189,6 +177,81 @@ with contours as (
   })
 })
 
+app.post('/getHillshade', (req, res) => {
+
+  let geojson = JSON.stringify(req.body.geojson)
+  console.log(geojson)
+  client.query(authQuery).then(() => {
+    // client.query(`
+
+    // SELECT 'data:image/png;base64,' || encode(ST_AsGDALRaster(st_hillshade(st_union(r.rast)), 'png'),'base64')
+    // FROM o_3_nyc_dem_cog AS r
+    //     INNER JOIN
+    //           st_transform(st_geomfromgeojson('${geojson}'),2263) as g
+    //         ON ST_Intersects(r.rast, g) 
+    //         `).then(result => {
+    //           res.send(result.rows)
+    client.query(`
+    
+  with r as ( SELECT ST_Union(ST_Clip(r.rast, g)) as a
+      FROM o_3_nyc_dem_cog AS r
+          INNER JOIN
+                st_transform(st_geomfromgeojson('${geojson}'),2263) as g
+              ON ST_Intersects(r.rast, g) )
+          select 'data:image/png;base64,' || encode(ST_AsGDALRaster(st_hillshade(r.a), 'png'),'base64'),st_asgeojson(st_transform(st_envelope(r.a),4326)) from r
+              `).then(result => {
+      console.log(result.rows)
+      res.send(result.rows);
+    })
+  })
+})
+
+function convertBase64ToPNG(base64String, outputPath) {
+  // Remove the data URL prefix and extract the base64 data
+  const base64Data = base64String.replace(/^data:image\/png;base64,/, '');
+
+  // Create a buffer from the base64 data
+  const buffer = Buffer.from(base64Data, 'base64');
+
+  // Write the buffer to the specified output path
+  fs.writeFileSync(outputPath, buffer);
+
+  console.log('Conversion complete!');
+}
+
+app.get("/getTiles/:z/:x/:y.png", (req, res) => {
+  let { z, x, y } = req.params;
+  console.log(x, y, z)
+  client.query(authQuery).then(() => {
+    client
+      .query(
+        `
+        SELECT 'data:image/png;base64,' || encode(st_aspng(ST_Union( ST_Clip(r.rast, g.geom) )),'base64')
+        FROM nyc_dem_3857 AS r
+            INNER JOIN
+              ST_TileEnvelope(${z},${x},${y}) AS g(geom)
+                ON ST_Intersects(r.rast, g.geom);
+            `
+      )
+      .then((result) => {
+        console.log(result.rows);
+        if (
+          (result != null || result != undefined) &&
+          result.rowCount > 0 &&
+          result.rows[0]["?column?"]
+        ) {
+          let filename = "image.png";
+
+          convertBase64ToPNG(result.rows[0]["?column?"], "./image.png");
+          res.sendFile(path.join(__dirname, filename), () => {
+            console.log("image sent");
+          });
+        } else {
+          console.log("null");
+        }
+      });
+  });
+});
 
 app.listen(5000, (req, res) => {
   console.log('server started on port 5000')
