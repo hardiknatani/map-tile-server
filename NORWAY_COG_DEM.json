@@ -1,62 +1,254 @@
 {
     "mosaicjson": "0.0.2",
-    "description": "None",
+    "name": "compositing",
+    "description": "A simple, light grey world.",
     "version": "1.0.0",
+    "attribution": "<a href='http://openstreetmap.org'>OSM contributors</a>",
     "minzoom": 10,
     "maxzoom": 16,
     "quadkey_zoom": 10,
     "bounds": [
-        4.658203125000006,
-        58.94150729841978,
-        5.339355468750009,
-        60.02369688198334
+        3.6226871616173604,
+        60.1423356950849,
+        6.575793595134318,
+        61.58051561785134
     ],
     "center": [
-        4.998779296875007,
-        59.48260209020156,
+        5.099240378375839,
+        60.86142565646812,
         10
     ],
     "tiles": {
-        "1200203103": [
-            "https://7a-cogs.s3.eu-west-1.amazonaws.com/cog_dem/33-102-116.tif",
-            "https://7a-cogs.s3.eu-west-1.amazonaws.com/cog_dem/33-102-117.tif"
+        "1200201100": [
+            "https://7a-cogs.s3.eu-west-1.amazonaws.com/cog_dem/33-102-128.tif",
+            "https://7a-cogs.s3.eu-west-1.amazonaws.com/cog_dem/33-103-128.tif",
+            "https://7a-cogs.s3.eu-west-1.amazonaws.com/cog_dem/33-103-129.tif"
         ],
-        "1200203112": [
-            "https://7a-cogs.s3.eu-west-1.amazonaws.com/cog_dem/33-102-116.tif",
-            "https://7a-cogs.s3.eu-west-1.amazonaws.com/cog_dem/33-102-117.tif"
+        "1200201101": [
+            "https://7a-cogs.s3.eu-west-1.amazonaws.com/cog_dem/33-102-128.tif",
+            "https://7a-cogs.s3.eu-west-1.amazonaws.com/cog_dem/33-103-128.tif",
+            "https://7a-cogs.s3.eu-west-1.amazonaws.com/cog_dem/33-103-129.tif",
+            "https://7a-cogs.s3.eu-west-1.amazonaws.com/cog_dem/33-104-128.tif",
+            "https://7a-cogs.s3.eu-west-1.amazonaws.com/cog_dem/33-104-129.tif"
         ],
-        "1200203121": [
-            "https://7a-cogs.s3.eu-west-1.amazonaws.com/cog_dem/33-102-115.tif",
-            "https://7a-cogs.s3.eu-west-1.amazonaws.com/cog_dem/33-102-116.tif",
-            "https://7a-cogs.s3.eu-west-1.amazonaws.com/cog_dem/33-102-117.tif"
+        "1200201102": [
+            "https://7a-cogs.s3.eu-west-1.amazonaws.com/cog_dem/33-102-127.tif",
+            "https://7a-cogs.s3.eu-west-1.amazonaws.com/cog_dem/33-102-128.tif",
+            "https://7a-cogs.s3.eu-west-1.amazonaws.com/cog_dem/33-103-128.tif"
         ],
-        "1200203130": [
-            "https://7a-cogs.s3.eu-west-1.amazonaws.com/cog_dem/33-102-115.tif",
-            "https://7a-cogs.s3.eu-west-1.amazonaws.com/cog_dem/33-102-116.tif",
-            "https://7a-cogs.s3.eu-west-1.amazonaws.com/cog_dem/33-102-117.tif"
+        "1200201103": [
+            "https://7a-cogs.s3.eu-west-1.amazonaws.com/cog_dem/33-102-127.tif",
+            "https://7a-cogs.s3.eu-west-1.amazonaws.com/cog_dem/33-102-128.tif",
+            "https://7a-cogs.s3.eu-west-1.amazonaws.com/cog_dem/33-103-127.tif",
+            "https://7a-cogs.s3.eu-west-1.amazonaws.com/cog_dem/33-103-128.tif",
+            "https://7a-cogs.s3.eu-west-1.amazonaws.com/cog_dem/33-104-127.tif",
+            "https://7a-cogs.s3.eu-west-1.amazonaws.com/cog_dem/33-104-128.tif"
         ],
-        "1200203123": [
-            "https://7a-cogs.s3.eu-west-1.amazonaws.com/cog_dem/33-102-114.tif",
-            "https://7a-cogs.s3.eu-west-1.amazonaws.com/cog_dem/33-102-115.tif"
+        "1200201110": [
+            "https://7a-cogs.s3.eu-west-1.amazonaws.com/cog_dem/33-104-128.tif",
+            "https://7a-cogs.s3.eu-west-1.amazonaws.com/cog_dem/33-104-129.tif"
         ],
-        "1200203132": [
-            "https://7a-cogs.s3.eu-west-1.amazonaws.com/cog_dem/33-102-114.tif",
-            "https://7a-cogs.s3.eu-west-1.amazonaws.com/cog_dem/33-102-115.tif"
+        "1200201112": [
+            "https://7a-cogs.s3.eu-west-1.amazonaws.com/cog_dem/33-104-127.tif",
+            "https://7a-cogs.s3.eu-west-1.amazonaws.com/cog_dem/33-104-128.tif",
+            "https://7a-cogs.s3.eu-west-1.amazonaws.com/cog_dem/33-105-126.tif"
         ],
-        "1200203301": [
-            "https://7a-cogs.s3.eu-west-1.amazonaws.com/cog_dem/33-101-113.tif",
-            "https://7a-cogs.s3.eu-west-1.amazonaws.com/cog_dem/33-102-113.tif",
-            "https://7a-cogs.s3.eu-west-1.amazonaws.com/cog_dem/33-102-114.tif"
+        "1200201113": [
+            "https://7a-cogs.s3.eu-west-1.amazonaws.com/cog_dem/33-105-126.tif"
         ],
-        "1200203310": [
-            "https://7a-cogs.s3.eu-west-1.amazonaws.com/cog_dem/33-101-113.tif",
-            "https://7a-cogs.s3.eu-west-1.amazonaws.com/cog_dem/33-102-112.tif",
-            "https://7a-cogs.s3.eu-west-1.amazonaws.com/cog_dem/33-102-113.tif",
-            "https://7a-cogs.s3.eu-west-1.amazonaws.com/cog_dem/33-102-114.tif"
+        "1200201120": [
+            "https://7a-cogs.s3.eu-west-1.amazonaws.com/cog_dem/33-102-126.tif",
+            "https://7a-cogs.s3.eu-west-1.amazonaws.com/cog_dem/33-102-127.tif"
         ],
-        "1200203303": [
-            "https://7a-cogs.s3.eu-west-1.amazonaws.com/cog_dem/33-101-113.tif",
-            "https://7a-cogs.s3.eu-west-1.amazonaws.com/cog_dem/33-102-113.tif"
+        "1200201121": [
+            "https://7a-cogs.s3.eu-west-1.amazonaws.com/cog_dem/33-102-126.tif",
+            "https://7a-cogs.s3.eu-west-1.amazonaws.com/cog_dem/33-102-127.tif",
+            "https://7a-cogs.s3.eu-west-1.amazonaws.com/cog_dem/33-103-125.tif",
+            "https://7a-cogs.s3.eu-west-1.amazonaws.com/cog_dem/33-103-126.tif",
+            "https://7a-cogs.s3.eu-west-1.amazonaws.com/cog_dem/33-103-127.tif",
+            "https://7a-cogs.s3.eu-west-1.amazonaws.com/cog_dem/33-104-126.tif",
+            "https://7a-cogs.s3.eu-west-1.amazonaws.com/cog_dem/33-104-127.tif"
+        ],
+        "1200201122": [
+            "https://7a-cogs.s3.eu-west-1.amazonaws.com/cog_dem/33-102-124.tif",
+            "https://7a-cogs.s3.eu-west-1.amazonaws.com/cog_dem/33-102-125.tif",
+            "https://7a-cogs.s3.eu-west-1.amazonaws.com/cog_dem/33-102-126.tif"
+        ],
+        "1200201123": [
+            "https://7a-cogs.s3.eu-west-1.amazonaws.com/cog_dem/33-102-124.tif",
+            "https://7a-cogs.s3.eu-west-1.amazonaws.com/cog_dem/33-102-125.tif",
+            "https://7a-cogs.s3.eu-west-1.amazonaws.com/cog_dem/33-102-126.tif",
+            "https://7a-cogs.s3.eu-west-1.amazonaws.com/cog_dem/33-103-124.tif",
+            "https://7a-cogs.s3.eu-west-1.amazonaws.com/cog_dem/33-103-125.tif",
+            "https://7a-cogs.s3.eu-west-1.amazonaws.com/cog_dem/33-103-126.tif"
+        ],
+        "1200201130": [
+            "https://7a-cogs.s3.eu-west-1.amazonaws.com/cog_dem/33-103-125.tif",
+            "https://7a-cogs.s3.eu-west-1.amazonaws.com/cog_dem/33-103-126.tif",
+            "https://7a-cogs.s3.eu-west-1.amazonaws.com/cog_dem/33-104-125.tif",
+            "https://7a-cogs.s3.eu-west-1.amazonaws.com/cog_dem/33-104-126.tif",
+            "https://7a-cogs.s3.eu-west-1.amazonaws.com/cog_dem/33-104-127.tif",
+            "https://7a-cogs.s3.eu-west-1.amazonaws.com/cog_dem/33-105-125.tif",
+            "https://7a-cogs.s3.eu-west-1.amazonaws.com/cog_dem/33-105-126.tif"
+        ],
+        "1200201131": [
+            "https://7a-cogs.s3.eu-west-1.amazonaws.com/cog_dem/33-104-125.tif",
+            "https://7a-cogs.s3.eu-west-1.amazonaws.com/cog_dem/33-105-125.tif",
+            "https://7a-cogs.s3.eu-west-1.amazonaws.com/cog_dem/33-105-126.tif"
+        ],
+        "1200201132": [
+            "https://7a-cogs.s3.eu-west-1.amazonaws.com/cog_dem/33-103-124.tif",
+            "https://7a-cogs.s3.eu-west-1.amazonaws.com/cog_dem/33-103-125.tif",
+            "https://7a-cogs.s3.eu-west-1.amazonaws.com/cog_dem/33-103-126.tif",
+            "https://7a-cogs.s3.eu-west-1.amazonaws.com/cog_dem/33-104-124.tif",
+            "https://7a-cogs.s3.eu-west-1.amazonaws.com/cog_dem/33-104-125.tif",
+            "https://7a-cogs.s3.eu-west-1.amazonaws.com/cog_dem/33-105-124.tif",
+            "https://7a-cogs.s3.eu-west-1.amazonaws.com/cog_dem/33-105-125.tif"
+        ],
+        "1200201133": [
+            "https://7a-cogs.s3.eu-west-1.amazonaws.com/cog_dem/33-104-124.tif",
+            "https://7a-cogs.s3.eu-west-1.amazonaws.com/cog_dem/33-104-125.tif",
+            "https://7a-cogs.s3.eu-west-1.amazonaws.com/cog_dem/33-105-124.tif",
+            "https://7a-cogs.s3.eu-west-1.amazonaws.com/cog_dem/33-105-125.tif"
+        ],
+        "1200201300": [
+            "https://7a-cogs.s3.eu-west-1.amazonaws.com/cog_dem/33-102-123.tif",
+            "https://7a-cogs.s3.eu-west-1.amazonaws.com/cog_dem/33-102-124.tif",
+            "https://7a-cogs.s3.eu-west-1.amazonaws.com/cog_dem/33-102-125.tif"
+        ],
+        "1200201301": [
+            "https://7a-cogs.s3.eu-west-1.amazonaws.com/cog_dem/33-102-123.tif",
+            "https://7a-cogs.s3.eu-west-1.amazonaws.com/cog_dem/33-102-124.tif",
+            "https://7a-cogs.s3.eu-west-1.amazonaws.com/cog_dem/33-102-125.tif",
+            "https://7a-cogs.s3.eu-west-1.amazonaws.com/cog_dem/33-103-123.tif",
+            "https://7a-cogs.s3.eu-west-1.amazonaws.com/cog_dem/33-103-124.tif"
+        ],
+        "1200201302": [
+            "https://7a-cogs.s3.eu-west-1.amazonaws.com/cog_dem/33-102-122.tif",
+            "https://7a-cogs.s3.eu-west-1.amazonaws.com/cog_dem/33-102-123.tif"
+        ],
+        "1200201303": [
+            "https://7a-cogs.s3.eu-west-1.amazonaws.com/cog_dem/33-102-122.tif",
+            "https://7a-cogs.s3.eu-west-1.amazonaws.com/cog_dem/33-102-123.tif",
+            "https://7a-cogs.s3.eu-west-1.amazonaws.com/cog_dem/33-103-122.tif",
+            "https://7a-cogs.s3.eu-west-1.amazonaws.com/cog_dem/33-103-123.tif"
+        ],
+        "1200201310": [
+            "https://7a-cogs.s3.eu-west-1.amazonaws.com/cog_dem/33-103-123.tif",
+            "https://7a-cogs.s3.eu-west-1.amazonaws.com/cog_dem/33-103-124.tif",
+            "https://7a-cogs.s3.eu-west-1.amazonaws.com/cog_dem/33-104-123.tif",
+            "https://7a-cogs.s3.eu-west-1.amazonaws.com/cog_dem/33-104-124.tif",
+            "https://7a-cogs.s3.eu-west-1.amazonaws.com/cog_dem/33-105-124.tif"
+        ],
+        "1200201311": [
+            "https://7a-cogs.s3.eu-west-1.amazonaws.com/cog_dem/33-104-123.tif",
+            "https://7a-cogs.s3.eu-west-1.amazonaws.com/cog_dem/33-104-124.tif",
+            "https://7a-cogs.s3.eu-west-1.amazonaws.com/cog_dem/33-105-123.tif",
+            "https://7a-cogs.s3.eu-west-1.amazonaws.com/cog_dem/33-105-124.tif"
+        ],
+        "1200201312": [
+            "https://7a-cogs.s3.eu-west-1.amazonaws.com/cog_dem/33-103-122.tif",
+            "https://7a-cogs.s3.eu-west-1.amazonaws.com/cog_dem/33-103-123.tif",
+            "https://7a-cogs.s3.eu-west-1.amazonaws.com/cog_dem/33-104-121.tif",
+            "https://7a-cogs.s3.eu-west-1.amazonaws.com/cog_dem/33-104-122.tif",
+            "https://7a-cogs.s3.eu-west-1.amazonaws.com/cog_dem/33-104-123.tif"
+        ],
+        "1200201313": [
+            "https://7a-cogs.s3.eu-west-1.amazonaws.com/cog_dem/33-104-121.tif",
+            "https://7a-cogs.s3.eu-west-1.amazonaws.com/cog_dem/33-104-122.tif",
+            "https://7a-cogs.s3.eu-west-1.amazonaws.com/cog_dem/33-104-123.tif",
+            "https://7a-cogs.s3.eu-west-1.amazonaws.com/cog_dem/33-105-121.tif",
+            "https://7a-cogs.s3.eu-west-1.amazonaws.com/cog_dem/33-105-122.tif",
+            "https://7a-cogs.s3.eu-west-1.amazonaws.com/cog_dem/33-105-123.tif"
+        ],
+        "1200201320": [
+            "https://7a-cogs.s3.eu-west-1.amazonaws.com/cog_dem/33-102-122.tif"
+        ],
+        "1200201321": [
+            "https://7a-cogs.s3.eu-west-1.amazonaws.com/cog_dem/33-102-120.tif",
+            "https://7a-cogs.s3.eu-west-1.amazonaws.com/cog_dem/33-102-121.tif",
+            "https://7a-cogs.s3.eu-west-1.amazonaws.com/cog_dem/33-102-122.tif",
+            "https://7a-cogs.s3.eu-west-1.amazonaws.com/cog_dem/33-103-120.tif",
+            "https://7a-cogs.s3.eu-west-1.amazonaws.com/cog_dem/33-103-121.tif",
+            "https://7a-cogs.s3.eu-west-1.amazonaws.com/cog_dem/33-103-122.tif"
+        ],
+        "1200201323": [
+            "https://7a-cogs.s3.eu-west-1.amazonaws.com/cog_dem/33-102-119.tif",
+            "https://7a-cogs.s3.eu-west-1.amazonaws.com/cog_dem/33-102-120.tif",
+            "https://7a-cogs.s3.eu-west-1.amazonaws.com/cog_dem/33-102-121.tif",
+            "https://7a-cogs.s3.eu-west-1.amazonaws.com/cog_dem/33-103-120.tif"
+        ],
+        "1200201330": [
+            "https://7a-cogs.s3.eu-west-1.amazonaws.com/cog_dem/33-102-120.tif",
+            "https://7a-cogs.s3.eu-west-1.amazonaws.com/cog_dem/33-103-120.tif",
+            "https://7a-cogs.s3.eu-west-1.amazonaws.com/cog_dem/33-103-121.tif",
+            "https://7a-cogs.s3.eu-west-1.amazonaws.com/cog_dem/33-103-122.tif",
+            "https://7a-cogs.s3.eu-west-1.amazonaws.com/cog_dem/33-104-120.tif",
+            "https://7a-cogs.s3.eu-west-1.amazonaws.com/cog_dem/33-104-121.tif",
+            "https://7a-cogs.s3.eu-west-1.amazonaws.com/cog_dem/33-104-122.tif"
+        ],
+        "1200201331": [
+            "https://7a-cogs.s3.eu-west-1.amazonaws.com/cog_dem/33-104-120.tif",
+            "https://7a-cogs.s3.eu-west-1.amazonaws.com/cog_dem/33-104-121.tif",
+            "https://7a-cogs.s3.eu-west-1.amazonaws.com/cog_dem/33-104-122.tif",
+            "https://7a-cogs.s3.eu-west-1.amazonaws.com/cog_dem/33-105-120.tif",
+            "https://7a-cogs.s3.eu-west-1.amazonaws.com/cog_dem/33-105-121.tif"
+        ],
+        "1200201332": [
+            "https://7a-cogs.s3.eu-west-1.amazonaws.com/cog_dem/33-102-119.tif",
+            "https://7a-cogs.s3.eu-west-1.amazonaws.com/cog_dem/33-102-120.tif",
+            "https://7a-cogs.s3.eu-west-1.amazonaws.com/cog_dem/33-103-119.tif",
+            "https://7a-cogs.s3.eu-west-1.amazonaws.com/cog_dem/33-103-120.tif",
+            "https://7a-cogs.s3.eu-west-1.amazonaws.com/cog_dem/33-104-119.tif",
+            "https://7a-cogs.s3.eu-west-1.amazonaws.com/cog_dem/33-104-120.tif"
+        ],
+        "1200201333": [
+            "https://7a-cogs.s3.eu-west-1.amazonaws.com/cog_dem/33-104-119.tif",
+            "https://7a-cogs.s3.eu-west-1.amazonaws.com/cog_dem/33-104-120.tif",
+            "https://7a-cogs.s3.eu-west-1.amazonaws.com/cog_dem/33-105-119.tif",
+            "https://7a-cogs.s3.eu-west-1.amazonaws.com/cog_dem/33-105-120.tif"
+        ],
+        "1200203101": [
+            "https://7a-cogs.s3.eu-west-1.amazonaws.com/cog_dem/33-102-118.tif",
+            "https://7a-cogs.s3.eu-west-1.amazonaws.com/cog_dem/33-102-119.tif"
+        ],
+        "1200203110": [
+            "https://7a-cogs.s3.eu-west-1.amazonaws.com/cog_dem/33-102-118.tif",
+            "https://7a-cogs.s3.eu-west-1.amazonaws.com/cog_dem/33-102-119.tif",
+            "https://7a-cogs.s3.eu-west-1.amazonaws.com/cog_dem/33-103-118.tif",
+            "https://7a-cogs.s3.eu-west-1.amazonaws.com/cog_dem/33-103-119.tif",
+            "https://7a-cogs.s3.eu-west-1.amazonaws.com/cog_dem/33-104-118.tif",
+            "https://7a-cogs.s3.eu-west-1.amazonaws.com/cog_dem/33-104-119.tif"
+        ],
+        "1200203111": [
+            "https://7a-cogs.s3.eu-west-1.amazonaws.com/cog_dem/33-103-118.tif",
+            "https://7a-cogs.s3.eu-west-1.amazonaws.com/cog_dem/33-104-117.tif",
+            "https://7a-cogs.s3.eu-west-1.amazonaws.com/cog_dem/33-104-118.tif",
+            "https://7a-cogs.s3.eu-west-1.amazonaws.com/cog_dem/33-104-119.tif",
+            "https://7a-cogs.s3.eu-west-1.amazonaws.com/cog_dem/33-105-117.tif",
+            "https://7a-cogs.s3.eu-west-1.amazonaws.com/cog_dem/33-105-118.tif",
+            "https://7a-cogs.s3.eu-west-1.amazonaws.com/cog_dem/33-105-119.tif"
+        ],
+        "1200210200": [
+            "https://7a-cogs.s3.eu-west-1.amazonaws.com/cog_dem/33-105-123.tif"
+        ],
+        "1200210202": [
+            "https://7a-cogs.s3.eu-west-1.amazonaws.com/cog_dem/33-105-121.tif",
+            "https://7a-cogs.s3.eu-west-1.amazonaws.com/cog_dem/33-105-122.tif",
+            "https://7a-cogs.s3.eu-west-1.amazonaws.com/cog_dem/33-105-123.tif"
+        ],
+        "1200210220": [
+            "https://7a-cogs.s3.eu-west-1.amazonaws.com/cog_dem/33-105-120.tif",
+            "https://7a-cogs.s3.eu-west-1.amazonaws.com/cog_dem/33-105-121.tif"
+        ],
+        "1200210222": [
+            "https://7a-cogs.s3.eu-west-1.amazonaws.com/cog_dem/33-105-119.tif",
+            "https://7a-cogs.s3.eu-west-1.amazonaws.com/cog_dem/33-105-120.tif"
+        ],
+        "1200212000": [
+            "https://7a-cogs.s3.eu-west-1.amazonaws.com/cog_dem/33-105-117.tif",
+            "https://7a-cogs.s3.eu-west-1.amazonaws.com/cog_dem/33-105-118.tif",
+            "https://7a-cogs.s3.eu-west-1.amazonaws.com/cog_dem/33-105-119.tif"
         ]
     }
 }
