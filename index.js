@@ -24,17 +24,20 @@ app.use(cors())
 
 // localhost
 const client = new Client({
-  user: env.localhostClient.user,
-  host: env.localhostClient.host,
-  database: env.localhostClient.database,
-  password: env.localhostClient.password,
-  port: env.localhostClient.port,
+  user: env.dbClient.user,
+  host: env.dbClient.host,
+  database: env.dbClient.database,
+  password: env.dbClient.password,
+  port: env.dbClient.port,
 });
 
-let authQuery = `SET postgis.gdal_vsi_options = 'AWS_ACCESS_KEY_ID=${env.s3Config_7a.accessKeyID} AWS_SECRET_ACCESS_KEY=${env.s3Config_7a.secretAccessKey} AWS_DEFAULT_REGION=${env.s3Config_7a.region}';
-SET postgis.gdal_enabled_drivers = 'ENABLE_ALL';
-SET postgis.enable_outdb_rasters = 1;
-`
+let authQuery = ""
+
+
+// `SET postgis.gdal_vsi_options = 'AWS_ACCESS_KEY_ID=${env.s3Config_7a.accessKeyID} AWS_SECRET_ACCESS_KEY=${env.s3Config_7a.secretAccessKey} AWS_DEFAULT_REGION=${env.s3Config_7a.region}';
+// SET postgis.gdal_enabled_drivers = 'ENABLE_ALL';
+// SET postgis.enable_outdb_rasters = 1;
+// `
 
 client.connect((err) => {
   if (err) {
@@ -252,6 +255,12 @@ app.get("/getTiles/:z/:x/:y.png", (req, res) => {
       });
   });
 });
+
+app.get('/getGridLinesTable',(req,res)=>{
+client.query(`
+SELECT *  FROM public."norway_gridLine" `).then(result=>res.send(result.rows))
+})
+
 
 app.listen(5000, (req, res) => {
   console.log('server started on port 5000')
