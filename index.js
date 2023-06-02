@@ -9,6 +9,7 @@ const path = require('path')
 const { getMosaicJsonUrl } = require('./tileutils')
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
+const NORWAY_COG_DEM = require('./NORWAY_COG_DEM.json')
 
 var aws = require('aws-sdk')
 
@@ -308,27 +309,23 @@ SELECT *  FROM public."norway_gridLine" `).then(result=>res.send(result.rows))
 
 app.post('/uploadMosaicJson',(req,res)=>{
 
-  let mosaicjson =req.body.mosaicjson;
-  let fileName=mosaicjson["name"]+'.json';
-  
-    fs.writeFile(fileName, JSON.stringify(mosaicjson), (err) => {
-      if (err) throw err;
-  
-      const fileContent = fs.readFileSync(fileName);
-  
-    return  putFileObject('houston/test/',fileContent,mosaicjson.name+'.json')
-      .then(data=> {
-        res.send(data);
-    })
-      .catch(err=>{
-        res.send(err)
-      }).then(data=>{
-        fs.unlinkSync(path.join(__dirname +"\\" + fileName));  
-      })
+  let {lat,lng,radius} =req.body;
 
-})
+    getMosaicJsonUrl(lat,lng,radius)
+    .then(data=>{
+      res.send(data)
+
+      //delete JSON file created on server
+      let filename = data['key'].split('/')[data['key'].split('/').length-1];
+      fs.unlink(filename,()=>{})
+    })
  
 
+})
+
+app.get('/test',(req,res)=>{
+  console.log(NORWAY_COG_DEM);
+  res.send(NORWAY_COG_DEM)
 })
 
 
