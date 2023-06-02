@@ -6,10 +6,11 @@ const cors = require('cors')
 const app = express()
 const env = require('./environment')
 const path = require('path')
-
+const { getMosaicJsonUrl } = require('./tileutils')
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
 
+var aws = require('aws-sdk')
 
 app.use(cors())
 
@@ -31,13 +32,14 @@ const client = new Client({
   port: env.dbClient.port,
 });
 
-let authQuery = ""
 
 
-// `SET postgis.gdal_vsi_options = 'AWS_ACCESS_KEY_ID=${env.s3Config_7a.accessKeyID} AWS_SECRET_ACCESS_KEY=${env.s3Config_7a.secretAccessKey} AWS_DEFAULT_REGION=${env.s3Config_7a.region}';
-// SET postgis.gdal_enabled_drivers = 'ENABLE_ALL';
-// SET postgis.enable_outdb_rasters = 1;
-// `
+
+let authQuery = 
+`SET postgis.gdal_vsi_options = 'AWS_ACCESS_KEY_ID=${env.s3Config_7a.accessKeyID} AWS_SECRET_ACCESS_KEY=${env.s3Config_7a.secretAccessKey} AWS_DEFAULT_REGION=${env.s3Config_7a.region}';
+SET postgis.gdal_enabled_drivers = 'ENABLE_ALL';
+SET postgis.enable_outdb_rasters = 1;
+`
 
 client.connect((err) => {
   if (err) {
@@ -46,6 +48,49 @@ client.connect((err) => {
     console.log(`DB Connected (${client.database})`,)
   }
 })
+
+function getS3Bucket() {
+  const bucket = new aws.S3(
+    {
+      accessKeyId: env.s3Config_7a.accessKeyID,
+      secretAccessKey: env.s3Config_7a.secretAccessKey,
+      region: env.s3Config_7a.region
+    }
+  );
+
+  return bucket;
+}
+function putFileObject(folder, file,fileName) {
+
+  const params = {
+    Bucket: env.s3Config_7a.bucket,
+    Key: folder + fileName,
+    Body: file
+  };
+
+  var options = {
+    partSize: 10 * 1024 * 1024,
+    queueSize: 1,
+  };
+
+    let upload = getS3Bucket().upload(params, options);
+    upload.on("httpUploadProgress",(progress)=>{
+    let progressPercentage = Math.round(progress.loaded / progress.total * 100);
+  })
+
+  return new Promise((resolve, reject) => {
+    upload.send(function (err, data) {
+      if (err) {
+        reject(false);
+        console.log(err)
+        
+      }else{
+        resolve(data);
+        console.log(data)
+      }
+    });
+  });
+}
 
 
 app.get('/getFilters/:tableName', (req, res) => {
@@ -259,6 +304,31 @@ app.get("/getTiles/:z/:x/:y.png", (req, res) => {
 app.get('/getGridLinesTable',(req,res)=>{
 client.query(`
 SELECT *  FROM public."norway_gridLine" `).then(result=>res.send(result.rows))
+})
+
+app.post('/uploadMosaicJson',(req,res)=>{
+
+  let mosaicjson =req.body.mosaicjson;
+  let fileName=mosaicjson["name"]+'.json';
+  
+    fs.writeFile(fileName, JSON.stringify(mosaicjson), (err) => {
+      if (err) throw err;
+  
+      const fileContent = fs.readFileSync(fileName);
+  
+    return  putFileObject('houston/test/',fileContent,mosaicjson.name+'.json')
+      .then(data=> {
+        res.send(data);
+    })
+      .catch(err=>{
+        res.send(err)
+      }).then(data=>{
+        fs.unlinkSync(path.join(__dirname +"\\" + fileName));  
+      })
+
+})
+ 
+
 })
 
 
